@@ -1,4 +1,4 @@
-import data from './data.json';
+import * as data from './data';
 import { Filter, buildFilter, fakeLatency, uuid } from './Utils';
 
 type Uuid = string;

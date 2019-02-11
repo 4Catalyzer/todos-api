@@ -28,10 +28,24 @@ describe('buildFilter', () => {
 
     expect(
       [
-        { completedAt: new Date('2019-02-05T10:50:00.000Z') },
-        { completedAt: new Date('2019-02-07T12:50:00.000Z') },
+        { completedAt: '2019-02-05T10:50:00.000Z' },
+        { completedAt: '2019-02-07T12:50:00.000Z' },
       ].filter(filter),
-    ).toEqual([{ completedAt: new Date('2019-02-07T12:50:00.000Z') }]);
+    ).toEqual([{ completedAt: '2019-02-07T12:50:00.000Z' }]);
+  });
+
+  it('should not filter absent values for comparision operators', () => {
+    const filter = buildFilter({
+      completedAt: { $lt: new Date('2019-02-05T12:50:00.000Z') },
+    });
+
+    expect(
+      [
+        { completedAt: null },
+        { completedAt: '2019-02-05T10:50:00.000Z' },
+        { completedAt: '2019-02-07T12:50:00.000Z' },
+      ].filter(filter),
+    ).toEqual([{ completedAt: '2019-02-05T10:50:00.000Z' }]);
   });
 
   it('should filter by multiple properties', () => {
