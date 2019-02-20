@@ -75,7 +75,7 @@ const myTodo = await api.getTodo('25ba9d67-3741-4513-895e-06f33ef6a509');
 
 ### `api.getTodos(options?: { filter: Filter<Todo> }): Promise<Todo[]>`
 
-Returns an array of `Todo`s optionally filtered by the provided filter (see: below);
+Returns an array of `Todo`s optionally filtered by the provided filter (see the filtering docs section);
 
 ```js
 const allTodos = await api.getTodos();
@@ -162,7 +162,7 @@ The result would be: `[{ name: 'John', age: 28 }]`
 
 - `$eq`: returns for properties that are strictly equal (`===`) to the value. **This is case sensitive**
 - `$neq`: returns for properties that are strictly **NOT** equal (`!==`) to the value. **This is case sensitive**
-- `$le`: "less than", returns if the value is `<` e.g. `4 < 5`
-- `$le`: "less than or equal to", returns if the value is `<=` e.g. `5 <= 5`
-- `$ge`: "greater than", returns if the value is `>` e.g. `5 > 6`
+- `$lt`: "less than", returns if the value is `<` e.g. `4 < 5`
+- `$lte`: "less than or equal to", returns if the value is `<=` e.g. `5 <= 5`
+- `$gt`: "greater than", returns if the value is `>` e.g. `5 > 6`
 - `$gte`: "greater than or equal to", returns if the value is `>=` e.g. `5 >= 5`
