@@ -1,13 +1,14 @@
 /* eslint-disable no-bitwise, no-nested-ternary */
 
 const LATENCY = 200;
-export type FilterOperator<T> =
-  | { $eq: T }
-  | { $neq: T }
-  | { $lte: T }
-  | { $lt: T }
-  | { $gte: T }
-  | { $gt: T };
+export type FilterOperator<T> = {
+  $eq?: T;
+  $neq?: T;
+  $lte?: T;
+  $lt?: T;
+  $gte?: T;
+  $gt?: T;
+};
 
 export type Filter<T> = { [P in keyof T]?: T[P] | FilterOperator<T[P]> };
 
@@ -40,34 +41,36 @@ export const buildFilter = <T>(filter: Filter<T>) => {
       if (!include) return false;
 
       let itemValue = (item as any)[key];
-      const [operator, opValue] = isOperator(value)
-        ? Object.entries(value)[0]
+      const operators = isOperator(value)
+        ? Object.entries(value)
         : ['$eq', value];
 
-      if (isDate(opValue) || isDateString(itemValue)) {
-        itemValue = itemValue && new Date(itemValue);
-      }
+      return operators.every(([operator, opValue]) => {
+        if (isDate(opValue) || isDateString(itemValue)) {
+          itemValue = itemValue && new Date(itemValue);
+        }
 
-      if (operator !== '$eq' && operator !== '$neq') {
-        if (itemValue == null) return false;
-      }
+        if (operator !== '$eq' && operator !== '$neq') {
+          if (itemValue == null) return false;
+        }
 
-      switch (operator) {
-        case '$eq':
-          return itemValue === opValue;
-        case '$neq':
-          return itemValue !== opValue;
-        case '$lt':
-          return itemValue < opValue;
-        case '$lte':
-          return itemValue <= opValue;
-        case '$gt':
-          return itemValue > opValue;
-        case '$gte':
-          return itemValue >= opValue;
-        default:
-          return include;
-      }
+        switch (operator) {
+          case '$eq':
+            return itemValue === opValue;
+          case '$neq':
+            return itemValue !== opValue;
+          case '$lt':
+            return itemValue < opValue;
+          case '$lte':
+            return itemValue <= opValue;
+          case '$gt':
+            return itemValue > opValue;
+          case '$gte':
+            return itemValue >= opValue;
+          default:
+            return include;
+        }
+      });
     }, true);
 };
 

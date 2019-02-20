@@ -142,7 +142,7 @@ set of operators. Below is a contrived example of a filter object:
 ```js
 const filter = {
   name: { $eq: 'John' },
-  age: { $gte: 24 },
+  age: { $gte: 24, $lt: 30 },
 };
 ```
 
@@ -153,6 +153,7 @@ const people = [
   { name: 'John', age: 18 },
   { name: 'Jane', age: 32 },
   { name: 'John', age: 28 },
+  { name: 'John', age: 45 },
 ];
 ```
 
