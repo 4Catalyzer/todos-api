@@ -159,8 +159,6 @@ const people = [
 
 The result would be: `[{ name: 'John', age: 28 }]`
 
-Multiple clauses for a field (eg `age: { $gte: 24, $lte: 30 },`) are currently not supported
-
 ### Filter Operators
 
 - `$eq`: returns for properties that are strictly equal (`===`) to the value. **This is case sensitive**
