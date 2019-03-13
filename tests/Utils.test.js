@@ -62,6 +62,25 @@ describe('buildFilter', () => {
       ].filter(filter),
     ).toEqual([{ completed: true, number: 2 }]);
   });
+
+  it('should handle multiple operators', () => {
+    const filter = buildFilter({
+      number: { $gt: 4, $lte: 8 },
+    });
+
+    expect(
+      [
+        { number: 4 },
+        { number: 8 },
+        { number: 7 },
+        { number: 10 },
+        { number: 1 },
+        { number: 15 },
+      ].filter(filter),
+    ).toEqual([{ number: 8 }, { number: 7 }]);
+  });
+
+  //
   [
     ['$eq', 4, 4, 5],
     ['$neq', 4, 5, 4],
