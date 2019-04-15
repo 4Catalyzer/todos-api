@@ -10,6 +10,9 @@
   "env": {
     "browser": true
   },
+  "globals": {
+    "workbox": false
+  },
   "rules": {
     "prettier/prettier": "error"
   }

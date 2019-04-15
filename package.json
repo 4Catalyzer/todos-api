@@ -11,8 +11,8 @@
   "license": "MIT",
   "scripts": {
     "babel": "babel src --ignore **/__tests__  --copy-files --delete-dir-on-start -x .js,.ts,.tsx",
-    "build": "yarn babel -d lib && yarn babel -d es --env-name esm && yarn build:types",
-    "build:types": "tsc --emitDeclarationOnly --outDir lib && tsc --outDir es",
+    "build": "rollup -c",
+    "build:types": "tsc --emitDeclarationOnly --outDir lib && tsc --outDir es --emitDeclarationOnly",
     "eslint": "eslint . --ext .js,.ts,.tsx",
     "format": "yarn eslint && 4c format src",
     "lint": "tsc --noEmit && yarn eslint && 4c format src --check",
@@ -82,9 +82,14 @@
     "jest": "^24.0.0",
     "lint-staged": "^8.1.0",
     "prettier": "^1.15.3",
+    "rollup": "^1.9.0",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-node-resolve": "^4.1.0",
     "typescript": "^3.2.2"
   },
   "dependencies": {
-    "date-arithmetic": "^3.1.0"
+    "date-arithmetic": "^3.1.0",
+    "path-to-regexp": "^3.0.0"
   }
 }

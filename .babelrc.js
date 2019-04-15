@@ -1,12 +1,12 @@
-module.exports = api => ({
+module.exports = {
   presets: [
     [
-      "@4c/4catalyzer",
+      '@4c/4catalyzer',
       {
-        target: "web",
-        modules: api.env() === "esm" ? false : "commonjs"
-      }
+        target: 'web',
+        modules: false,
+      },
     ],
-    "@babel/preset-typescript"
-  ]
-});
+    '@babel/preset-typescript',
+  ],
+};
